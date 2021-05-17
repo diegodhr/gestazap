@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');
+/* <a href="index.html" id="home"><i class="material-icons md-36">logout</i></a> */
+
+:root {
+    --br: 1px solid rgba(255, 255, 255, 0.5);
+    --bk-shadow: rgba(0, 0, 0, 0.144);
+    --bl-shadow: rgba(6, 98, 235, 0.144);
+    --br-shadow-input: 3px 3px 6px 2px rgba(0, 0, 0, 0.36);
+    --btn-blue:rgb(29, 137, 255);
+    --sz-btn: 1.4em;
+    --br-rad-btn:.3em;
+    --mrg-btn:.8em;
+    --mrg-forms:.8em;
+    --size-header:4em;
+    --brd-radius:.3em;
+    --mrg-panel:2em;
+}
+*{
+    box-sizing: border-box;
+}
+html,
+body {
+    height: fit-content;
+    font-family: 'Comfortaa',Arial, Helvetica, sans-serif;
+}
+a{
+    text-decoration: none;
+}
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+::-webkit-scrollbar:vertical {
+    width:10px;
+}
+
+::-webkit-scrollbar-button:increment,::-webkit-scrollbar-button {
+    display: none;
+} 
+
+::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;  
+}
+/* table{
+    margin: 0 !important;
+} */

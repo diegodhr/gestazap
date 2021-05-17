@@ -1,0 +1,127 @@
+form{
+    margin: 0;
+}
+.table{
+    margin: 0 ;
+}
+.panel {
+    margin: var(--mrg-panel);
+}
+main{
+    margin-top: 5em;
+    height: fit-content ;
+}
+
+.panel-title {
+    font-size: 1.5em;
+    text-align: start ;
+    padding-top: 0.4em;
+}
+.tbl_panel{    
+    max-height: 25rem ;
+    overflow-y: scroll;
+    border-radius: var(--brd-radius);
+    margin: var(--mrg-panel);
+    background-color: rgba(255, 255, 255, 0.288);
+    backdrop-filter: blur(20px);
+    border: var(--br);
+    box-shadow: 5px 5px 15px 1px rgba(0, 0, 0, 0.651);
+    z-index: 2;
+    justify-content: space-around;
+}
+.tbl_stock{
+    width: 100%;
+}
+.tbl_stock thead th{
+    background: #333;
+    color: white;
+}
+th{
+    z-index: 10;
+}
+.tbl_stock th,
+.tbl_stock td{
+    padding: .5em;
+}
+.tbl_stock th,
+.tbl_stock td{    
+    min-width: 2em ;
+    border-right: var(--br) ;
+    text-align: start;
+    padding-left: .5em;
+}
+.tbl_stock tbody tr{
+    border-bottom: .15em solid white;
+}
+
+.tbl_stock tbody tr{
+    background-color: rgba(73, 128, 209, 0.096) ;
+}
+.tbl_stock tbody tr:nth-child(even){
+    background-color: rgba(94, 201, 201, 0.158) ;
+}
+
+.tbl_stock .sticky{
+    position: sticky ;
+    top: 0 ;
+}
+.tbl_stock>tbody{
+    z-index: 0;
+}
+.panel_botones{    
+    flex-direction: row !important;
+    justify-content: space-between !important ;
+    background-color: rgba(212, 133, 166, 0.411) !important;
+}
+
+.btn_general {
+    border: none;
+    color: white;
+    padding: .5em .25em;
+    border-radius: var(--br-rad-btn);
+    box-shadow: 3px 3px 5px 3px rgba(3, 46, 92, 0.541);
+    transition: .6s;
+    backdrop-filter: blur(5px);
+    z-index: 2;
+}
+.btn_general:hover {
+    box-shadow: 3px 3px 5px 3px rgba(95, 95, 95, 0.541) ;
+    backdrop-filter: blur(5px) ;
+}
+.btn_cancelar{
+    background-color: var(--bs-danger);
+}
+.btn_cancelar:hover{
+    background-color: white ;
+    color: var(--bs-danger) ;
+}
+.btn_ver{
+    background-color: var(--bs-success) ;
+}
+.btn_ver:hover{
+    background-color: white ;
+    color: var(--bs-success) ;
+}
+
+.td_imagen{    
+    width:10em;
+    height:9em;
+}
+
+.td_imagen>img{
+    height: 100% ;
+    width: 100% ;
+    object-fit: cover;
+}
+
+/* .td_imagen{    
+    width:5em;
+    height:10em;
+}
+.td_imagen>img{
+    height: 100% ;
+    width: 100% ;
+}
+.btn_seleccion{
+    width: 100% ;
+} */

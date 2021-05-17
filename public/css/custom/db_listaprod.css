@@ -1,0 +1,88 @@
+.table{
+    margin: 0 ;
+}
+.panel {
+    margin: var(--mrg-panel);
+}
+main{
+    margin-top: 5em;
+    height: fit-content ;
+}
+
+.panel-title {
+    font-size: 1.5em;
+    text-align: start ;
+    padding-top: 0.4em;
+}
+.botones {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 1em 0;
+}
+.botones>a {
+    width: 30%;
+}
+
+.tbl_panel{    
+    max-height: 25rem !important;
+    overflow-y: scroll;
+    border-radius: var(--brd-radius);
+    margin: var(--mrg-panel);
+    background-color: rgba(255, 255, 255, 0.288);
+    backdrop-filter: blur(20px);
+    border: var(--br);
+    box-shadow: 5px 5px 15px 1px rgba(0, 0, 0, 0.651);
+    z-index: 2;
+    justify-content: space-around;
+}
+.tbl_stock{
+    width: 100%;
+}
+.tbl_stock thead th{
+    background: #333;
+    color: white;
+}
+th{
+    z-index: 10;
+}
+.tbl_stock th,
+.tbl_stock td{
+    padding: .5em;
+}
+.tbl_stock th,
+.tbl_stock td{    
+    min-width: 2em !important;
+    border-right: var(--br) !important;
+    text-align: start;
+    padding-left: .5em;
+}
+.tbl_stock tbody tr{
+    border-bottom: .15em solid white;
+}
+
+.impar{
+    background-color: rgba(73, 128, 209, 0.096) !important;
+}
+.par{
+    background-color: rgba(94, 201, 201, 0.158) !important;
+}
+
+.tbl_stock .sticky{
+    position: sticky !important;
+    top: 0 !important;
+}
+.tbl_stock>tbody{
+    z-index: 0;
+}
+.td_imagen{    
+    width:9em;
+    height:9em;
+}
+.td_imagen>img{
+    height: 100% !important;
+    width: 100% !important;
+}
+.btn_editar{
+    width: 100% !important;
+}

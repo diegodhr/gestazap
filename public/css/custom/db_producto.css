@@ -1,0 +1,100 @@
+.panel {
+    margin: var(--mrg-panel);
+}
+main{
+    margin-top: 5em;
+    height: fit-content;
+}
+form{
+    margin: 0;
+}
+.btn_volver {    
+    align-self: flex-start;
+}
+.panel-title {
+    font-size: 1.5em;
+    text-align: start;
+    padding-top: 0.4em;
+}
+.titulo_img{
+    display: flex;
+    justify-content: space-between;
+}
+
+img{    
+    margin: var(--mrg-forms) var(--mrg-forms);
+    width:auto ; 
+    height: 15em;
+    align-self: center;
+    border-radius: 1em;
+}
+
+.cont_talla>form{
+    width: fit-content;
+    display: flex;    
+    justify-content: space-around;
+    align-items: center;
+    border-radius: var(--brd-radius);
+    margin-bottom: var(--mrg-forms);
+    max-height: max-content;
+    padding: .5em;
+    background-color: rgba(255, 255, 255, 0.13);
+    box-shadow: 5px 5px 15px 1px rgba(0, 0, 0, 0.651);
+    backdrop-filter: blur(1px);
+    z-index: 2;
+}
+.lbl_talla{
+    font-size: 1.3em;
+    color: rgb(32, 2, 2);
+    margin-bottom: 0 ;
+    z-index: 2;
+    font-weight: bold;
+    text-shadow: 3px 4px 6px rgba(80, 76, 76, 0.788);
+}
+.cont_talla>form>input{
+    margin: 0 .6em;
+}
+/* Tabla de stock */
+.cont_stock{
+    max-height: 13rem ;
+    width: 100%;
+    overflow: scroll;
+    border-radius: var(--brd-radius);
+    background-color: rgba(255, 255, 255, 0.288);
+    backdrop-filter: blur(20px);
+    box-shadow: 5px 5px 15px 1px rgba(0, 0, 0, 0.651);
+    z-index: 2;
+}
+
+.tbl_tallas{
+    width: 100%;
+}
+.tbl_tallas .sticky{
+    position: sticky ;
+    top: 0 ;
+}
+
+
+.tbl_tallas th,
+.tbl_tallas td{    
+    min-width: .4em ;
+    border-right: var(--br) ;
+    border-bottom: var(--br) ;
+    text-align: center;
+    padding-left: .1em;
+}
+.tbl_tallas thead th{
+    background: #333;
+    color: white;
+}
+th{
+    z-index: 10;
+}
+
+.unidades{
+    width: 100%;
+}
+.btn_add_stock{
+    font-size: 1em;
+    margin: .5em 0;
+}

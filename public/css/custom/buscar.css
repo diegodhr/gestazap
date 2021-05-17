@@ -1,0 +1,92 @@
+form{
+    margin: 0;
+}
+.table{
+    margin: 0 ;
+}
+.panel {
+    margin: 1em var(--mrg-panel) !important;
+}
+.panel_res{
+    flex-direction: row !important;
+    justify-content: space-between;
+}
+main{
+    margin-top: 5em;
+    height: fit-content !important;
+}
+.btn_volver {    
+    align-self: flex-start;
+}
+.panel>.form_buscar{
+    display: flex;
+    width: 100%;    
+    margin: 1em 0;
+    justify-content: space-between;
+    padding: .4em;
+    background-color: rgba(82, 139, 101, 0.534);
+    border-radius: var(--brd-radius);
+}
+.txt_busqueda{
+    width: 87%;
+    font-size: 1.2em;
+}
+.card-title{
+    text-align: center;
+    background: #333;
+    color: white;
+}
+.lbl_datos{
+    max-width: 7em;
+    background: #333;
+    color: white;
+    padding-left: .3em;
+    border-radius: .2em;
+}
+.lbl_datos{
+    margin: 0 .5em;
+}
+.txt_datos{
+    margin-bottom: .4em;
+    margin-left: .5em;
+    margin-right: .5em;
+}
+.btn_agregar{
+    width: 8em;
+    height: 1.8em;
+    align-self: center;
+}
+
+.card{
+    background-color: transparent !important;
+    padding-bottom: .5em;
+    backdrop-filter: blur(20px);
+    box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.342);
+    z-index: 2;
+    border-radius: var(--brd-radius);
+
+}
+.card-img{
+    width: 100%;
+    height: 14em;
+    object-fit: cover;
+}
+.card-body{
+    background-color: transparent !important;
+}
+.lbl_marca{
+    margin-bottom: 0;
+    z-index: 2;
+    font-weight: bold;
+    padding: .5em;
+    border-radius: var(--br);
+    text-align: center;
+    margin-bottom: 1em;
+    color: rgb(32, 2, 2);
+    text-shadow: 3px 4px 6px rgba(80, 76, 76, 0.788);
+    background-color: crimson;
+    background-color: rgba(255, 255, 255, 0.226);
+    backdrop-filter: blur(20px);
+    box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.342);
+
+}

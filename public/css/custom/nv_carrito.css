@@ -1,0 +1,80 @@
+form{
+    margin: 0;
+}
+table{
+    margin: 0;
+}
+.panel {
+    margin: var(--mrg-panel);
+}
+
+.panel_botones{    
+    flex-direction: row !important;
+    justify-content: space-between !important ;
+    background-color: rgba(212, 133, 166, 0.411) !important;
+}
+
+.btn_general {
+    border: none;
+    color: white;
+    padding: .5em .25em;
+    border-radius: var(--br-rad-btn);
+    box-shadow: 3px 3px 5px 3px rgba(3, 46, 92, 0.541);
+    transition: .6s;
+    backdrop-filter: blur(5px);
+    z-index: 2;
+}
+.btn_general:hover {
+    box-shadow: 3px 3px 5px 3px rgba(95, 95, 95, 0.541) ;
+    backdrop-filter: blur(5px) ;
+}
+.btn_finalizar{
+    background-color: var(--bs-danger) ;
+}
+.btn_finalizar:hover{
+    background-color: white ;
+    color: var(--bs-danger) ;
+}
+
+.tbl_panel{
+    overflow: scroll;
+}
+main{
+    margin-top: 5em;
+    height: fit-content ;
+    width: 100%;
+}
+.tbl_venta{
+    width: 100%;
+}
+.tbl_venta thead th{
+    background: #333;
+    color: white;
+}
+.tbl_venta th,
+.tbl_venta td{
+    padding: .2em;
+}
+.tbl_venta th,
+.tbl_venta td{    
+    min-width: 2em ;
+    border-right: var(--br) ;
+    text-align: start;
+    padding-left: .5em;
+}
+.tbl_venta tbody tr{
+    border-bottom: .15em solid white;
+}
+
+.tbl_venta tbody tr{
+    background-color: rgba(73, 128, 209, 0.096) ;
+}
+.tbl_venta tbody tr:nth-child(even){
+    background-color: rgba(94, 201, 201, 0.158) ;
+}
+.tbl_venta tfoot{
+    background-color: rgba(120, 196, 143, 0.445);
+}
+/* ::-webkit-scrollbar {
+    display: none;
+} */

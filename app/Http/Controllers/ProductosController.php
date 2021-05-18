@@ -102,7 +102,7 @@ class ProductosController extends Controller
         $producto->tallasUnidades()->save($talla_unidades);
 
         request()->session()->regenerate();
-        return redirect()->intended('/venta');
+        return redirect()->intended('/producto');
     }
 
 

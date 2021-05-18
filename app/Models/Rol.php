@@ -10,6 +10,10 @@ class Rol extends Model
     use HasFactory;
     public $timestamps = false;
 
+    protected $fillable = [
+        'tipo'
+    ];
+
     // public function users(){
     //     return $this->hasMany(User::class);
     // }

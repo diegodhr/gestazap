@@ -6,6 +6,7 @@ use App\Models\Producto;
 use App\Models\Tallaunidades;
 use Exception;
 use Goutte\Client;
+use Symfony\Component\DomCrawler\UriResolver;
 
 use Illuminate\Http\Request;
 use Symfony\Component\DomCrawler\Crawler;
@@ -27,7 +28,7 @@ class ProductosController extends Controller
     public function index()
     {
         $productos = Producto::all();
-        
+
         $parametros = array('productos' => $productos, 'titulo' => config('constantes.RUTAS.PRODUCTOS'));
         return view('Producto.index', compact('parametros'));
     }
@@ -81,7 +82,7 @@ class ProductosController extends Controller
             if ($footlocker) {
                 $busqueda[config('constantes.TIENDA.FOOT')] = $footlocker;
             }
-        }        
+        }
         $parametros = array('titulo' => config('constantes.RUTAS.NUEVOPRODUCTO'), 'busqueda' => $busqueda);
         return view('Producto.create', compact('parametros'));
     }
@@ -109,13 +110,67 @@ class ProductosController extends Controller
     public function buscar_t1($criterio)
     {
         try {
-            $barato = array();
-            $criterio = $this->formatear_criterio($criterio, '+');
 
-            $url = 'https://www.sivasdescalzo.com/es/catalogsearch/result/?q=' . $criterio . '';
+            // $client = new GuzzleHttp\Client([
+            //     'debug' => true, // only to troubleshoot
+            // );
+
+            // // Obtain the html page with the form
+            // $request = $client->createRequest('GET', $url);
+            // $response = $client->send($request);
+            // // or $response = $client->get($url);
+
+            // // create crawler and obtain the form.
+            // $crawler = new Symfony\Component\DomCrawler\Crawler(null, $response->getEffectiveUrl());
+            // $crawler->addContent(
+            //     $response->getBody()->__toString(),
+            //     $response->getHeader('Content-Type')
+            // );
+
+            // $form = $crawler->form('form_identifier');
+            // $form->setValues($data_array);
+
+            // //form submission
+            // $request = $client->createRequest(
+            //     $form->getMethod(),
+            //     $form->getUrl(),
+            //     [
+            //         'body' => $form->getPhpValues(),
+            // ]);
+
+            // $response = $client->send($request);
+
+            $barato = array();
+
             $cliente = new Client();
             $cliente->setServerParameter('HTTP_USER_AGENT', 'user agent');
+
+
+            // $crawler = $cliente->request('GET', 'https://www.sivasdescalzo.com/es');            
+            $crawler = $cliente->request('GET', 'https://www.sivasdescalzo.com/es/catalogsearch');
+            $form = $crawler->selectButton('Search')->form();
+            $page = $cliente->submit($form, ['q' => 'asics GEL-1090']);
+            $url = $page->getUri();
             $page = $cliente->request('GET', $url);
+
+            // $uri = $page->getUri();
+
+            // dump($uri);
+            // exit;
+            // $crawler = $client->request('GET', 'https://github.com/');
+            // $crawler = $client->click($crawler->selectLink('Sign in')->link());
+
+            // $form = $crawler->selectButton('Search')->form();
+            // $crawler = $client->submit($form, ['login' => 'fabpot', 'password' => 'xxxxxx']);
+
+            
+            // $criterio = $this->formatear_criterio($criterio, '+');
+
+            // $url = 'https://www.sivasdescalzo.com/es/catalogsearch/result/?q=' . $criterio . '';
+            
+
+            // $cliente->setServerParameter('HTTP_USER_AGENT', 'user agent');
+
 
             $page->filter('.grid-col')->each(function ($item) {
                 $producto = array();
@@ -286,14 +341,14 @@ class ProductosController extends Controller
         $producto = json_decode($request->producto);
         $prod_db = Producto::find($producto->id);
         $stock =  $prod_db->tallasUnidades()->where('producto_id', $producto->id)->where('talla', $request['talla_select'])->first();
-        
+
         $stock->talla = $request['talla_select'];
-        $total = $stock['unidades']+$request['cantidad'];        
+        $total = $stock['unidades'] + $request['cantidad'];
         $stock->unidades = $total;
         $prod_db->tallasUnidades()->save($stock);
 
         request()->session()->regenerate();
-        return redirect()->intended('/dashboard/producto/' . $producto->id . '')->with('nuevo_stock', "Stock actualizado");        
+        return redirect()->intended('/dashboard/producto/' . $producto->id . '')->with('nuevo_stock', "Stock actualizado");
     }
 
     /**

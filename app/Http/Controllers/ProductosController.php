@@ -66,8 +66,8 @@ class ProductosController extends Controller
 
         if ($request->criterio) {
             $svd = $this->buscar_t1($request->criterio);
-            // $jdsports = $this->buscar_t2($request->criterio);
-            // $footlocker = $this->buscar_t3($request->criterio);
+            $jdsports = $this->buscar_t2($request->criterio);
+            $footlocker = $this->buscar_t3($request->criterio);
 
             $busqueda[config('constantes.TIENDA.SVD')] = array();
             $busqueda[config('constantes.TIENDA.JD')] = array();
@@ -76,12 +76,12 @@ class ProductosController extends Controller
             if ($svd) {
                 $busqueda[config('constantes.TIENDA.SVD')] = $svd;
             }
-            // if ($jdsports) {
-            //     $busqueda[config('constantes.TIENDA.JD')] = $jdsports;
-            // }
-            // if ($footlocker) {
-            //     $busqueda[config('constantes.TIENDA.FOOT')] = $footlocker;
-            // }
+            if ($jdsports) {
+                $busqueda[config('constantes.TIENDA.JD')] = $jdsports;
+            }
+            if ($footlocker) {
+                $busqueda[config('constantes.TIENDA.FOOT')] = $footlocker;
+            }
         }
         $parametros = array('titulo' => config('constantes.RUTAS.NUEVOPRODUCTO'), 'busqueda' => $busqueda);
         return view('Producto.create', compact('parametros'));

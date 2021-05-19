@@ -149,7 +149,7 @@ class ProductosController extends Controller
             // $crawler = $cliente->request('GET', 'https://www.sivasdescalzo.com/es');            
             $crawler = $cliente->request('GET', 'https://www.sivasdescalzo.com/es/catalogsearch');
             $form = $crawler->selectButton('Search')->form();
-            $page = $cliente->submit($form, ['q' => 'asics GEL-1090']);
+            $page = $cliente->submit($form, ['q' => $criterio]);
             // $url = $page->getUri();
             // $page = $cliente->request('GET', $url);
 

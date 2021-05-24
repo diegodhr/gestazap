@@ -6,12 +6,10 @@ use App\Models\Producto;
 use App\Models\Tallaunidades;
 use Exception;
 use Goutte\Client;
-use Symfony\Component\DomCrawler\UriResolver;
-
 use Illuminate\Http\Request;
+
+use Symfony\Component\DomCrawler\UriResolver;
 use Symfony\Component\DomCrawler\Crawler;
-
-
 use function PHPSTORM_META\type;
 use function Psy\debug;
 
@@ -41,37 +39,21 @@ class ProductosController extends Controller
     public function create()
     {
         $busqueda = null;
-        // Snipes, foot locker y zalando.
-        // weidner/goutte
-        // $sitio1= $this->buscar_t1('https://www.footlocker.es/es/search?query=nike%20air%20vapormax%20evo');
-        // $sitio2= $this->buscar_t2('https://www.sivasdescalzo.com/es/catalogsearch/result/?q=nike+air+vapormax+evo');
-        // $sitio3= $this->buscar_t3('https://www.jdsports.es/search/nike+air+vapormax+evo/');
-
-        // $resultado = array();
-        // $cliente = new Client();
-        // // $url='https://www.courir.es/es/search?q=JORDAN+MAX+AURA+2&lang=es_ES';
-        // // $url='https://www.snipes.es/search?q=jordan+sky+jordan&lang=es_ES';
-        // $url='https://www.footlocker.es/es/search?query=Jordan%20Max%20Aura%202';
-        // // $url='https://www.footlocker.es/es/search?query=Jordan%20Max%20Aura%202';
-
-
         $parametros = array('titulo' => config('constantes.RUTAS.NUEVOPRODUCTO'), 'busqueda' => $busqueda);
         return view('Producto.create', compact('parametros'));
     }
 
     public function buscar_producto(Request $request)
     {
-
         $busqueda = array();
-
         if ($request->criterio) {
             $svd = $this->buscar_t1($request->criterio);
             $jdsports = $this->buscar_t2($request->criterio);
-            $footlocker = $this->buscar_t3($request->criterio);
+            $one = $this->buscar_t3($request->criterio);
 
             $busqueda[config('constantes.TIENDA.SVD')] = array();
             $busqueda[config('constantes.TIENDA.JD')] = array();
-            $busqueda[config('constantes.TIENDA.FOOT')] = array();
+            $busqueda[config('constantes.TIENDA.ONE')] = array();
 
             if ($svd) {
                 $busqueda[config('constantes.TIENDA.SVD')] = $svd;
@@ -79,8 +61,8 @@ class ProductosController extends Controller
             if ($jdsports) {
                 $busqueda[config('constantes.TIENDA.JD')] = $jdsports;
             }
-            if ($footlocker) {
-                $busqueda[config('constantes.TIENDA.FOOT')] = $footlocker;
+            if ($one) {
+                $busqueda[config('constantes.TIENDA.ONE')] = $one;
             }
         }
         $parametros = array('titulo' => config('constantes.RUTAS.NUEVOPRODUCTO'), 'busqueda' => $busqueda);
@@ -109,68 +91,16 @@ class ProductosController extends Controller
 
     public function buscar_t1($criterio)
     {
-        try {
-
-            // $client = new GuzzleHttp\Client([
-            //     'debug' => true, // only to troubleshoot
-            // );
-
-            // // Obtain the html page with the form
-            // $request = $client->createRequest('GET', $url);
-            // $response = $client->send($request);
-            // // or $response = $client->get($url);
-
-            // // create crawler and obtain the form.
-            // $crawler = new Symfony\Component\DomCrawler\Crawler(null, $response->getEffectiveUrl());
-            // $crawler->addContent(
-            //     $response->getBody()->__toString(),
-            //     $response->getHeader('Content-Type')
-            // );
-
-            // $form = $crawler->form('form_identifier');
-            // $form->setValues($data_array);
-
-            // //form submission
-            // $request = $client->createRequest(
-            //     $form->getMethod(),
-            //     $form->getUrl(),
-            //     [
-            //         'body' => $form->getPhpValues(),
-            // ]);
-
-            // $response = $client->send($request);
-
+        try {            
             $barato = array();
+            $criterio_anterior = $criterio;
 
             $cliente = new Client();
             $cliente->setServerParameter('HTTP_USER_AGENT', 'user agent');
 
-
-            // $crawler = $cliente->request('GET', 'https://www.sivasdescalzo.com/es');            
             $crawler = $cliente->request('GET', 'https://www.sivasdescalzo.com/es/catalogsearch');
             $form = $crawler->selectButton('Search')->form();
             $page = $cliente->submit($form, ['q' => $criterio]);
-            // $url = $page->getUri();
-            // $page = $cliente->request('GET', $url);
-
-            // $uri = $page->getUri();
-
-            // dump($uri);
-            // exit;
-            // $crawler = $client->request('GET', 'https://github.com/');
-            // $crawler = $client->click($crawler->selectLink('Sign in')->link());
-
-            // $form = $crawler->selectButton('Search')->form();
-            // $crawler = $client->submit($form, ['login' => 'fabpot', 'password' => 'xxxxxx']);
-
-            
-            // $criterio = $this->formatear_criterio($criterio, '+');
-
-            // $url = 'https://www.sivasdescalzo.com/es/catalogsearch/result/?q=' . $criterio . '';
-            
-
-            // $cliente->setServerParameter('HTTP_USER_AGENT', 'user agent');
-
 
             $page->filter('.grid-col')->each(function ($item) {
                 $producto = array();
@@ -186,19 +116,33 @@ class ProductosController extends Controller
                 $producto['modelo'] = $modelo;
                 $producto['precio'] = $precio;
                 $producto['imagen'] = $imagen;
-
                 $this->productos1[] = $producto;
             });
 
             foreach ($this->productos1 as $producto) {
-                if (empty($barato)) {
-                    $barato = $producto;
-                } else {
-                    if ($producto['precio'] < $barato['precio']) {
-                        unset($barato);
-                        $barato = $producto;
+                $marca = strtolower($producto['marca']);
+                $modelo = explode(" ", strtolower($producto['modelo']));                
+                $criterio =  explode(" ", strtolower($criterio_anterior));
+                $criterio_nomarca =array_diff($criterio,[$marca]);
+                $modelo_bool = true;
+
+                foreach ($criterio_nomarca as $elm_criterio) {
+                    if(!in_array($elm_criterio, $modelo)){
+                        $modelo_bool=false;
+                        break;
                     }
                 }
+
+                if (in_array($marca, $criterio) && $modelo_bool) {
+                    if (empty($barato)) {
+                        $barato = $producto;
+                    } else {
+                        if ($producto['precio'] < $barato['precio']) {
+                            unset($barato);
+                            $barato = $producto;
+                        }
+                    }
+                }                
             }
 
             return $barato;
@@ -212,6 +156,7 @@ class ProductosController extends Controller
         try {
 
             $barato = array();
+            $criterio_anterior = $criterio;
 
             $criterio = $this->formatear_criterio($criterio, '+');
 
@@ -255,16 +200,28 @@ class ProductosController extends Controller
             });
 
             foreach ($this->productos2 as $producto) {
-                if (empty($barato)) {
-                    $barato = $producto;
-                } else {
-                    if ($producto['precio'] < $barato['precio']) {
-                        unset($barato);
+                $marca = strtolower($producto['marca']);
+                $modelo = explode(" ", strtolower($producto['modelo']));
+                $criterio =  explode(" ", strtolower($criterio_anterior));                
+                $modelo_bool = true;
+                foreach ($criterio as $elm_criterio) {
+                    if(!in_array($elm_criterio, $modelo)){
+                        $modelo_bool=false;
+                        break;
+                    }
+                }
+                
+                if (in_array($marca, $criterio) && $modelo_bool) {
+                    if (empty($barato)) {
                         $barato = $producto;
+                    } else {
+                        if ($producto['precio'] < $barato['precio']) {
+                            unset($barato);
+                            $barato = $producto;
+                        }
                     }
                 }
             }
-
             return $barato;
         } catch (Exception $ex) {
             return false;
@@ -274,6 +231,7 @@ class ProductosController extends Controller
     {
         try {
             $barato = array();
+            $criterio_anterior = $criterio;
             $criterio = $this->formatear_criterio($criterio, '%20');
             $url = 'https://www.thesneakerone.com/busqueda?controller=search&s=' . $criterio . '';
             $cliente = new Client();
@@ -301,15 +259,26 @@ class ProductosController extends Controller
 
                 $this->productos3[] = $producto;
             });
-
-
             foreach ($this->productos3 as $producto) {
-                if (empty($barato)) {
-                    $barato = $producto;
-                } else {
-                    if ($producto['precio'] < $barato['precio']) {
-                        unset($barato);
+                $marca = strtolower($producto['marca']);
+                $modelo = explode(" ", strtolower($producto['modelo']));
+                $criterio =  explode(" ", strtolower($criterio_anterior));                
+                $modelo_bool = true;
+                foreach ($criterio as $elm_criterio) {
+                    if(!in_array($elm_criterio, $modelo)){
+                        $modelo_bool=false;
+                        break;
+                    }
+                }
+                
+                if (in_array($marca, $criterio) && $modelo_bool) {
+                    if (empty($barato)) {
                         $barato = $producto;
+                    } else {
+                        if ($producto['precio'] < $barato['precio']) {
+                            unset($barato);
+                            $barato = $producto;
+                        }
                     }
                 }
             }

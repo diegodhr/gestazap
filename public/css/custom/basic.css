@@ -51,6 +51,9 @@ a{
 ::-webkit-scrollbar-track {
     border-radius: 10px;  
 }
+.alert{
+    margin: var(--mrg-panel) !important;
+}
 /* table{
     margin: 0 !important;
 } */

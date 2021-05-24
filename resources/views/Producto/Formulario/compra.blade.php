@@ -17,7 +17,7 @@
                 <tr>
                     <td>{{ $opcion->talla }}</td>
                     <td>{{ $opcion->unidades }}</td>
-                    <td> <input type="number" name="cantidad" id="" max="{{ $opcion->unidades }}"> </td>
+                    <td> <input class="unidades_compra" type="number" name="cantidad" id="" min="1" max="{{ $opcion->unidades }}"> </td>
                     <td>
                         <button class="btn_add_stock btn_accion" type="submit">                            
                             <i class="material-icons">add_circle_outline</i>&nbsp;

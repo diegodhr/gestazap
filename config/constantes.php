@@ -18,7 +18,7 @@
         'TIENDA'=>array(
             'SVD'=>'sivasdescalzo',
             'JD'=>'jdsports',
-            'FOOT'=>'footlocker',
+            'ONE'=>'theSneakerOne',
         ),
     );
     

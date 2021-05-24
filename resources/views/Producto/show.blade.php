@@ -28,14 +28,26 @@
             <h3 class="panel-title">{{ $producto->modelo }}</h3>
         </div>
         @if (Session::has('nuevo_stock'))
-        <div class="alert alert-info">{{ Session::get('nuevo_stock') }}</div>
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></span>
+            <strong>{{ Session::get('nuevo_stock') }}</strong>
+        </div>
         @endif
 
         @if (Session::has('res_talla'))
         @if (session('res_talla')==1)
-        <div class="alert alert-danger">Ya existe esa talla</div>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></span>
+            <strong>Ya existe esa talla</strong>
+        </div>
         @else
-        <div class="alert alert-info">Talla añadida correctamente</div>
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></span>
+            <strong>Talla añadida correctamente</strong>
+        </div>
         @endif
         @php
         Session::forget('res_talla');

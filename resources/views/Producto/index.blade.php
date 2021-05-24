@@ -11,14 +11,12 @@
             <i class="material-icons">add_circle_outline</i>&nbsp;
             <i>Agregar producto</i>
         </a>
-        <a href="../"
-            class="btn_accion d-flex align-items-center justify-content-center">
+        <a href="../" class="btn_accion d-flex align-items-center justify-content-center">
             <i class="material-icons">arrow_back</i>&nbsp;
             <i>Volver</i>
         </a>
     </div>
 </div>
-
 
 @if ($parametros['productos']->isNotEmpty())
 
@@ -37,42 +35,44 @@
         </thead>
         <tbody>
             @php
-                $pos = "impar"
+            $pos = "impar"
             @endphp
             @foreach ($parametros['productos'] as $producto)
 
-                @php
-                $span = count($producto->tallasUnidades);
-                $primero = true;
-                @endphp                
-                @foreach ($producto->tallasUnidades as $detalles)
-                <tr>
-                    @if ($primero)
-                        <td class="{{ $pos }}" rowspan="{{ $span }}">{{ $producto->marca }}</td>
-                        <td class="{{ $pos }}" rowspan="{{ $span }}">{{ $producto->modelo }}</td>
-                    @endif
+            @php
+            $span = count($producto->tallasUnidades);
+            $primero = true;
+            @endphp
+            @foreach ($producto->tallasUnidades as $detalles)
+            <tr>
+                @if ($primero)
+                <td class="{{ $pos }}" rowspan="{{ $span }}">{{ $producto->marca }}</td>
+                <td class="{{ $pos }}" rowspan="{{ $span }}">{{ $producto->modelo }}</td>
+                @endif
 
-                    <td class="{{ $pos }}">{{ $detalles->talla }}</td>
-                    <td class="{{ $pos }}">{{ $detalles->unidades }}</td>
+                <td class="{{ $pos }}">{{ $detalles->talla }}</td>
+                <td class="{{ $pos }}">{{ $detalles->unidades }}</td>
 
-                    @if ($primero)
-                        <td class="{{ $pos }}" rowspan="{{ $span }}">{{ number_format($producto->precio, 2)." €"  }}</td>
-                        <td class="{{ $pos }} td_imagen" rowspan="{{ $span }}"> <img style="height: 4em" src="{{ $producto->foto }}" alt=""> </td>
-                        <td class="{{ $pos }}" rowspan="{{ $span }}"> 
-                            <a href="{{ route('producto.show',$producto->id) }}" class="btn_accion d-flex align-items-center justify-content-center"> 
-                                <i class="material-icons">edit</i>
-                                <i>Editar</i>  
-                            </a>
-                            </td>
-                        @php
-                        $primero=false;
-                        @endphp
-                    @endif
-                </tr>
-                @endforeach
+                @if ($primero)
+                <td class="{{ $pos }}" rowspan="{{ $span }}">{{ number_format($producto->precio, 2)." €"  }}</td>
+                <td class="{{ $pos }} td_imagen" rowspan="{{ $span }}"> <img style="height: 4em"
+                        src="{{ $producto->foto }}" alt=""> </td>
+                <td class="{{ $pos }}" rowspan="{{ $span }}">
+                    <a href="{{ route('producto.show',$producto->id) }}"
+                        class="btn_accion d-flex align-items-center justify-content-center">
+                        <i class="material-icons">edit</i>
+                        <i>Editar</i>
+                    </a>
+                </td>
                 @php
-                $pos = ($pos=="impar")?$pos="par":$pos="impar";
+                $primero=false;
                 @endphp
+                @endif
+            </tr>
+            @endforeach
+            @php
+            $pos = ($pos=="impar")?$pos="par":$pos="impar";
+            @endphp
             @endforeach
 
         </tbody>

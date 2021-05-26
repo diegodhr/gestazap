@@ -13,9 +13,9 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // seleccion de la bienvenida dependiendo del usuario
     public function index()
-    {   
-        // $usuario = ['usuario'=>auth()->user()];
+    {           
         if (session('nueva_venta')) {
             Session::forget('nueva_venta');
         }

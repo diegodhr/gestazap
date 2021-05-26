@@ -16,7 +16,6 @@ class EmpleadosController extends Controller
      */
     public function index()
     {
-        // $parametros = ['usuario'=>auth()->user(),'titulo'=>config('constantes.RUTAS.DASHBOARD')];
         $empleados = Empleado::all();
         $parametros = array('empleados' => $empleados, 'titulo' => config('constantes.RUTAS.EMPLEADOS'));
         return view('Empleado.index', compact('parametros'));

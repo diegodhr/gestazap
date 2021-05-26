@@ -7,11 +7,7 @@ use Illuminate\Http\Request;
 
 class AdminlogController extends Controller
 {
-    public function categoria(){        
-        // dump(auth()->user());
-        // if(){
-        //     return  view('Empleado.create');
-        // }
+    public function categoria(){
         return view('Adminlog.categoria');
     }
     public function nueva_categoria(Request $request)

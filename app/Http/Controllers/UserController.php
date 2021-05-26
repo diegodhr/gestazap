@@ -16,6 +16,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // Si ya esta registrado muestra el dashboard
     public function index()
     {
         if (Auth::user()) {
@@ -40,6 +41,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // Valida formulario de login
     public function store(Request $request)
     {
         $credentials = $request->validate([

@@ -8,6 +8,7 @@
     <title> {{ $parametros['titulo'] }} </title>    
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom/basic.css') }}" rel="stylesheet">
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}">
 </head>
 
 <body>

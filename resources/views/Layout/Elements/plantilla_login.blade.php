@@ -8,6 +8,7 @@
     @dump($parametros)
     <title>{{ request()->route()->getName() }}</title>
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    {{-- <link rel="icon" href="{{ asset('images/favicon.ico') }}"> --}}
     <style>
         html,
         body {

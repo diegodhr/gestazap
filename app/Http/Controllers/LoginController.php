@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 class LoginController extends Controller
 {
 
+    // Muestra la ventana de incio de sesion
     public function index(Redirector $redirect)
     {
         $parametros = ['usuario'=>auth()->user(),'titulo'=>config('constantes.RUTAS.LOGIN')];        
@@ -21,6 +22,7 @@ class LoginController extends Controller
         return view('Login.index',compact('parametros'));
     }
 
+    // valida el usuario y la contraseña
     public function login(Request $request, Redirector $redirect)
     {
         $request->validate([
@@ -43,6 +45,7 @@ class LoginController extends Controller
         ]);
     }
 
+    // cierra sesion
     public function logout(Request $request, Redirector $redirect)
     {
         if (auth()->user()->rol_id == config('constantes.ROL.EMPLEADO') && session('venta_id')!=null) {

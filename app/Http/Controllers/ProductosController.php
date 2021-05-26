@@ -23,6 +23,7 @@ class ProductosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // Muestra los productos del almacen
     public function index()
     {
         $productos = Producto::all();
@@ -36,6 +37,7 @@ class ProductosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // Muestra la pantalla de agregar producto
     public function create()
     {
         $busqueda = null;
@@ -43,6 +45,7 @@ class ProductosController extends Controller
         return view('Producto.create', compact('parametros'));
     }
 
+    // Busca el producto
     public function buscar_producto(Request $request)
     {
         $busqueda = array();
@@ -88,7 +91,7 @@ class ProductosController extends Controller
         return redirect()->intended('/dashboard/producto/');
     }
 
-
+    // Busca en la primera tienda
     public function buscar_t1($criterio)
     {
         try {            
@@ -151,6 +154,7 @@ class ProductosController extends Controller
         }
     }
 
+    // Busca en la segunda tienda
     public function buscar_t2($criterio)
     {
         try {
@@ -227,6 +231,8 @@ class ProductosController extends Controller
             return false;
         }
     }
+
+    // Busca en la tercera tienda
     public function buscar_t3($criterio)
     {
         try {
@@ -288,6 +294,7 @@ class ProductosController extends Controller
         }
     }
 
+    //Modifica el criterio de busqueda
     public function formatear_criterio($criterio, $formato)
     {
         $criterio = trim($criterio);
@@ -302,6 +309,7 @@ class ProductosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // Guarda el producto con la talla
     public function store(Request $request)
     {
         $request->validate([

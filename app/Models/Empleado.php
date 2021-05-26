@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Empleado extends Model
 {
     use HasFactory;
+    // Relaciones con otras tablas
     public function rol(){
         return $this->belongsTo(Rol::class);
     }

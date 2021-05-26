@@ -62,6 +62,7 @@ class VentasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // Agregar producto al carro
     public function store(Request $request)
     {
         $prod_temp = json_decode($request->producto);
@@ -90,6 +91,7 @@ class VentasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // Ver el carro de venta
     public function show($id)
     {
         $venta = Venta::findOrFail($id);

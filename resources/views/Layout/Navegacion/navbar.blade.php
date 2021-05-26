@@ -8,10 +8,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                {{-- <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="dashboard/empleado">Empleados</a>
-                </li> --}}                
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">               
                 @if ($parametros['usuario']['rol_id']==config('constantes.ROL.ADMINISTRADOR'))
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="dashboard/producto">Productos</a>
@@ -21,16 +18,6 @@
                     <a class="nav-link active" aria-current="page" href="#">Finalizar venta</a>
                 </li>
                 @endif
-                
-                {{-- <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Comisiones</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Campañas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Salarios</a>
-                </li> --}}
         </div>
     </div>
 </nav>

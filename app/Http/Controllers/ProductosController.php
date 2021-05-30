@@ -150,8 +150,6 @@ class ProductosController extends Controller
 
             return $barato;
         } catch (Exception $ex) {
-            dump($ex);
-            exit;
             return false;
         }
     }
